@@ -1,5 +1,6 @@
 use gloo::console::log;
 use serde::{Deserialize, Serialize};
+use std::fmt::Display;
 use yew::prelude::*;
 
 #[derive(Serialize, Deserialize)]
@@ -13,8 +14,9 @@ pub fn app() -> Html {
     html! {
         <>
             <h1>{ "Hello, world!" }</h1>
-            <LogAndClass />
-            <Conditionals />
+            // <LogAndClass />
+            // <Conditionals />
+            <Loops />
         </>
     }
 }
@@ -58,4 +60,37 @@ fn log_and_class() -> Html {
             <p>{"Open console to see Gloo's log"}</p>
         </div>
     }
+}
+
+#[function_component(Loops)]
+fn loops() -> Html {
+    let tasks = vec![
+        "clean the dishes",
+        "make the bed",
+        "code your entire life into nvim",
+    ];
+    let numbers = vec![3, 5, 11];
+    html! {
+        <ol>
+            { list_to_html(tasks) }
+            <ul>
+                { list_to_html(numbers) }
+            </ul>
+        </ol>
+    }
+}
+
+fn list_to_html<T>(list: Vec<T>) -> Html
+where
+    T: Display,
+{
+    list.iter()
+        .map(|e| {
+            html! {
+                <li>
+                    { e }
+                </li>
+            }
+        })
+        .collect()
 }
