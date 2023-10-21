@@ -1,6 +1,7 @@
 use gloo::console::log;
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
+use stylist::{style, yew::styled_component};
 use yew::prelude::*;
 
 #[derive(Serialize, Deserialize)]
@@ -14,9 +15,10 @@ pub fn app() -> Html {
     html! {
         <>
             <h1>{ "Hello, world!" }</h1>
-            // <LogAndClass />
-            // <Conditionals />
+            <LogAndClass />
+            <Conditionals />
             <Loops />
+            <StylistComponent />
         </>
     }
 }
@@ -93,4 +95,25 @@ where
             }
         })
         .collect()
+}
+
+#[styled_component(StylistComponent)]
+fn stylist_component() -> Html {
+    let stylesheet = style!(
+        r#"
+        h1, h2, h3 {
+            color: #8fbcbb;
+        }
+        p {
+            color: #88c0d0;
+        }
+        "#
+    )
+    .unwrap();
+    html! {
+        <div class={stylesheet}>
+            <h2>{ "Hello guys! I'm styled" }</h2>
+            <p>{ "Other styled text" }</p>
+        </div>
+    }
 }
