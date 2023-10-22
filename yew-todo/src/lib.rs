@@ -4,6 +4,10 @@ use std::fmt::Display;
 use stylist::{style, yew::styled_component};
 use yew::prelude::*;
 
+mod components;
+
+use components::atoms::main_title::MainTitle;
+
 #[derive(Serialize, Deserialize)]
 struct MyData {
     name: String,
@@ -12,13 +16,14 @@ struct MyData {
 
 #[function_component(App)]
 pub fn app() -> Html {
+    let main_title_load = Callback::from(|message: String| log!(message));
     html! {
         <>
-            <h1>{ "Hello, world!" }</h1>
-            <LogAndClass />
-            <Conditionals />
-            <Loops />
-            <StylistComponent />
+            <MainTitle title="Hello there!" on_load={main_title_load} />
+            // <LogAndClass />
+            // <Conditionals />
+            // <Loops />
+            // <StylistComponent />
         </>
     }
 }
