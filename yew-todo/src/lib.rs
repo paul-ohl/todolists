@@ -7,6 +7,7 @@ use yew::prelude::*;
 mod components;
 
 use components::atoms::main_title::MainTitle;
+use components::molecules::custom_form::CustomForm;
 
 #[derive(Serialize, Deserialize)]
 struct MyData {
@@ -20,6 +21,7 @@ pub fn app() -> Html {
     html! {
         <>
             <MainTitle title="Hello there!" on_load={main_title_load} />
+            <CustomForm />
             // <LogAndClass />
             // <Conditionals />
             // <Loops />
